@@ -1,0 +1,69 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Caredev.MegoTools.VS", "src\Caredev.MegoTools.VS\Caredev.MegoTools.VS.csproj", "{6C99C775-EFC6-4490-A97E-E2657B318BD9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Caredev.MegoTools.VSWizard", "src\Caredev.MegoTools.VS\Caredev.MegoTools.VSWizard.csproj", "{F5FE663C-A365-4D49-B77B-1C42CE441B75}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VS.ItemTemplates", "VS.ItemTemplates", "{AFBA78C0-A0D7-427F-9243-0B5A687BDD34}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Caredev.MTIT.CSharp.Context", "src\Caredev.MTIT.CSharp.Context\Caredev.MTIT.CSharp.Context.csproj", "{FDA2ADC3-C9DA-4CDF-A2E5-9F2E3ADD99BC}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Caredev.MTIT.VisualBasic.Context", "src\Caredev.MTIT.VisualBasic.Context\Caredev.MTIT.VisualBasic.Context.vbproj", "{A4F1FDBB-CAF3-48B5-B1B9-645BB8C31D99}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6C99C775-EFC6-4490-A97E-E2657B318BD9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C99C775-EFC6-4490-A97E-E2657B318BD9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C99C775-EFC6-4490-A97E-E2657B318BD9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C99C775-EFC6-4490-A97E-E2657B318BD9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5FE663C-A365-4D49-B77B-1C42CE441B75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5FE663C-A365-4D49-B77B-1C42CE441B75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5FE663C-A365-4D49-B77B-1C42CE441B75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5FE663C-A365-4D49-B77B-1C42CE441B75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDA2ADC3-C9DA-4CDF-A2E5-9F2E3ADD99BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA2ADC3-C9DA-4CDF-A2E5-9F2E3ADD99BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA2ADC3-C9DA-4CDF-A2E5-9F2E3ADD99BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA2ADC3-C9DA-4CDF-A2E5-9F2E3ADD99BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4F1FDBB-CAF3-48B5-B1B9-645BB8C31D99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4F1FDBB-CAF3-48B5-B1B9-645BB8C31D99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4F1FDBB-CAF3-48B5-B1B9-645BB8C31D99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4F1FDBB-CAF3-48B5-B1B9-645BB8C31D99}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FDA2ADC3-C9DA-4CDF-A2E5-9F2E3ADD99BC} = {AFBA78C0-A0D7-427F-9243-0B5A687BDD34}
+		{A4F1FDBB-CAF3-48B5-B1B9-645BB8C31D99} = {AFBA78C0-A0D7-427F-9243-0B5A687BDD34}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {44EABB0F-5E44-4935-8F9A-76CCB27C56E9}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://www.caredev.site/tfs/customcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = src\\Caredev.MegoTools.VS\\Caredev.MegoTools.VS.csproj
+		SccProjectName1 = src/Caredev.MegoTools.VS
+		SccLocalPath1 = src\\Caredev.MegoTools.VS
+		SccProjectUniqueName2 = src\\Caredev.MegoTools.VS\\Caredev.MegoTools.VSWizard.csproj
+		SccProjectName2 = src/Caredev.MegoTools.VS
+		SccLocalPath2 = src\\Caredev.MegoTools.VS
+		SccProjectUniqueName3 = src\\Caredev.MTIT.CSharp.Context\\Caredev.MTIT.CSharp.Context.csproj
+		SccProjectTopLevelParentUniqueName3 = Caredev.MegoTools.sln
+		SccProjectName3 = src/Caredev.MTIT.CSharp.Context
+		SccLocalPath3 = src\\Caredev.MTIT.CSharp.Context
+		SccProjectUniqueName4 = src\\Caredev.MTIT.VisualBasic.Context\\Caredev.MTIT.VisualBasic.Context.vbproj
+		SccProjectTopLevelParentUniqueName4 = Caredev.MegoTools.sln
+		SccProjectName4 = src/Caredev.MTIT.VisualBasic.Context
+		SccLocalPath4 = src\\Caredev.MTIT.VisualBasic.Context
+	EndGlobalSection
+EndGlobal

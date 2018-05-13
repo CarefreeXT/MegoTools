@@ -1,0 +1,51 @@
+﻿<UserControl x:Class="Caredev.MegoTools.View.ServerConnectionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" 
+             xmlns:pros="clr-namespace:Caredev.MegoTools.Properties"
+             xmlns:local="clr-namespace:Caredev.MegoTools.View"
+             mc:Ignorable="d" Background="White" Loaded="UserControl_Loaded"
+             d:DesignWidth="500">
+    <UserControl.Resources>
+        <Style TargetType="GroupBox">
+            <Setter Property="Padding" Value="13" />
+            <Setter Property="Margin" Value="0,5" />
+        </Style>
+        <xctk:InverseBoolConverter x:Key="InverseBoolConverter" />
+    </UserControl.Resources>
+    <StackPanel>
+        <Label Margin="0,5" Content="{x:Static pros:Resources.ServerConnection_Host}" />
+        <TextBox Text="{Binding Host}" Height="26" FontSize="14" Margin="0,0,0,5" />
+        <GroupBox Header="{x:Static pros:Resources.ServerConnection_GroupHost}">
+            <StackPanel>
+                <StackPanel Name="spIntegratedScurity">
+                    <RadioButton Name="rbIntegratedSecurity" IsChecked="{Binding IntegratedSecurity}" Margin="0,5" Content="{x:Static pros:Resources.ServerConnection_Windows}"></RadioButton>
+                    <RadioButton Name="rbIntegratedSecurity1" Margin="0,5" Content="{x:Static pros:Resources.ServerConnection_UserNamePassword}"></RadioButton>
+                </StackPanel>
+                <Grid Margin="25,5,0,0" IsEnabled="{Binding IntegratedSecurity,Converter={StaticResource InverseBoolConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Label VerticalAlignment="Center" Content="{x:Static pros:Resources.ServerConnection_UserName}" Grid.Row="0" />
+                    <Label VerticalAlignment="Center" Content="{x:Static pros:Resources.ServerConnection_Password}" Grid.Row="1" />
+                    <TextBox Text="{Binding UserName}" Margin="0,2" Height="26" Grid.Row="0" Grid.Column="1" />
+                    <xctk:WatermarkPasswordBox Name="password" PasswordChanged="Password_PasswordChanged"
+                                 Margin="0,2" Height="26" Grid.Row="1" Grid.Column="1" />
+                </Grid>
+            </StackPanel>
+        </GroupBox>
+        <GroupBox Name="gbDatabase" Header="{x:Static pros:Resources.ServerConnection_GroupDb}">
+            <StackPanel>
+                <Label Margin="0,5" Content="{x:Static pros:Resources.ServerConnection_Database}" />
+                <ComboBox ItemsSource="{Binding Databases}" Text="{Binding Database}" Height="26" FontSize="14" IsEditable="True" />
+            </StackPanel>
+        </GroupBox>
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:sdk="http://schemas.microsoft.com/developer/vstemplate-sdkextension/2010">
+  <TemplateData>
+    <Name Package="{F613182E-C5E4-4A71-9A94-C593C32F4DCB}" ID="121" />
+    <Description Package="{F613182E-C5E4-4A71-9A94-C593C32F4DCB}" ID="122" />
+    <Icon Package="{F613182E-C5E4-4A71-9A94-C593C32F4DCB}" ID="400" />
+    <TemplateID>dd5f33fd-84ec-450e-a97c-6bd748bd2ce7</TemplateID>
+    <ShowByDefault>true</ShowByDefault>
+    <ProjectType>VisualBasic</ProjectType>
+    <TemplateGroupID>Data</TemplateGroupID>
+    <NumberOfParentCategoriesToRollUp>1</NumberOfParentCategoriesToRollUp>
+    <DefaultName>Model</DefaultName>
+  </TemplateData>
+  <TemplateContent>
+    <References>
+      <Reference>
+        <Assembly>System</Assembly>
+      </Reference>
+    </References>
+    <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.vb">Class.vb</ProjectItem>
+  </TemplateContent>
+  <WizardExtension>
+    <Assembly>Caredev.MegoTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7036752531664be2</Assembly>
+    <FullClassName>Caredev.MegoTools.VSMegoWizard</FullClassName>
+  </WizardExtension>
+</VSTemplate>

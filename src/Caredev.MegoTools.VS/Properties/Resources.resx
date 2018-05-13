@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AdvancedProperty_Cancel" xml:space="preserve">
+    <value>取消(_C)</value>
+  </data>
+  <data name="AdvancedProperty_Ok" xml:space="preserve">
+    <value>确定(_O)</value>
+  </data>
+  <data name="AdvancedProperty_Title" xml:space="preserve">
+    <value>高级属性</value>
+  </data>
+  <data name="ColumnElement_Comments_Description" xml:space="preserve">
+    <value>指定在映射类型中的属性注释。</value>
+  </data>
+  <data name="ColumnElement_Comments_Name" xml:space="preserve">
+    <value>注释</value>
+  </data>
+  <data name="ColumnElement_ConcurrencyCheck_Description" xml:space="preserve">
+    <value>指定当前列在提交时参与乐观并发检查。</value>
+  </data>
+  <data name="ColumnElement_ConcurrencyCheck_Name" xml:space="preserve">
+    <value>并发检查</value>
+  </data>
+  <data name="ColumnElement_IsNullable_Description" xml:space="preserve">
+    <value>指定当前列是否可以为空。</value>
+  </data>
+  <data name="ColumnElement_IsNullable_Name" xml:space="preserve">
+    <value>是否为空</value>
+  </data>
+  <data name="ColumnElement_PropertyName_Description" xml:space="preserve">
+    <value>指定在映射类型中的属性名。</value>
+  </data>
+  <data name="ColumnElement_PropertyName_Name" xml:space="preserve">
+    <value>属性名</value>
+  </data>
+  <data name="ColumnElement_TypeName_Description" xml:space="preserve">
+    <value>指定数据库中存储的类型。</value>
+  </data>
+  <data name="ColumnElement_TypeName_Name" xml:space="preserve">
+    <value>类型名</value>
+  </data>
+  <data name="ColumnLengthElement_IsFixed_Description" xml:space="preserve">
+    <value>指定当前列在数据库中是否固定长度</value>
+  </data>
+  <data name="ColumnLengthElement_IsFixed_Name" xml:space="preserve">
+    <value>固定长度</value>
+  </data>
+  <data name="ColumnLengthElement_MaxLength_Description" xml:space="preserve">
+    <value>指定当前列在数据库中的最大长度</value>
+  </data>
+  <data name="ColumnLengthElement_MaxLength_Name" xml:space="preserve">
+    <value>最大长度</value>
+  </data>
+  <data name="ColumnPrecisionElement_Precision_Description" xml:space="preserve">
+    <value>指定当前列在数据库中的数据精度。</value>
+  </data>
+  <data name="ColumnPrecisionElement_Precision_Name" xml:space="preserve">
+    <value>精度</value>
+  </data>
+  <data name="ColumnPrecisionElement_Scale_Description" xml:space="preserve">
+    <value>指定当前列在数据库中的小数位数。</value>
+  </data>
+  <data name="ColumnPrecisionElement_Scale_Name" xml:space="preserve">
+    <value>小数位数</value>
+  </data>
+  <data name="ColumnStringElement_IsUnicode_Description" xml:space="preserve">
+    <value>指定当前列在数据库中是否使用Unicode编码。</value>
+  </data>
+  <data name="ColumnStringElement_IsUnicode_Name" xml:space="preserve">
+    <value>Unicode</value>
+  </data>
+  <data name="ConnectionInfo_ReloadError" xml:space="preserve">
+    <value>加载连接信息发生错误：{0}</value>
+  </data>
+  <data name="ConnectionInfo_SaveError" xml:space="preserve">
+    <value>保存连接信息发生错误：{0}</value>
+  </data>
+  <data name="CreateConnection_Advanced" xml:space="preserve">
+    <value>高级(_V)…</value>
+  </data>
+  <data name="CreateConnection_Cancel" xml:space="preserve">
+    <value>取消(_C)</value>
+  </data>
+  <data name="CreateConnection_ConnectionName" xml:space="preserve">
+    <value>连接名称:</value>
+  </data>
+  <data name="CreateConnection_DefaultName" xml:space="preserve">
+    <value>新连接</value>
+  </data>
+  <data name="CreateConnection_Head" xml:space="preserve">
+    <value>输入信息以连接到选定提供程序的数据源，或从下拉框中选择另一个提供程序。</value>
+  </data>
+  <data name="CreateConnection_NameCannotNull" xml:space="preserve">
+    <value>连接名称不能为空。</value>
+  </data>
+  <data name="CreateConnection_Ok" xml:space="preserve">
+    <value>确定(_O)</value>
+  </data>
+  <data name="CreateConnection_Provider" xml:space="preserve">
+    <value>提供程序:</value>
+  </data>
+  <data name="CreateConnection_Sucess" xml:space="preserve">
+    <value>连接成功。</value>
+  </data>
+  <data name="CreateConnection_Test" xml:space="preserve">
+    <value>测试连接(_T)</value>
+  </data>
+  <data name="CreateConnection_Title" xml:space="preserve">
+    <value>添加连接</value>
+  </data>
+  <data name="FileConnection_Browse" xml:space="preserve">
+    <value>浏览(_B)...</value>
+  </data>
+  <data name="FileConnection_Create" xml:space="preserve">
+    <value>创建(_C)...</value>
+  </data>
+  <data name="FileConnection_FileName" xml:space="preserve">
+    <value>数据库文件名(_D):</value>
+  </data>
+  <data name="FileConnection_GroupHost" xml:space="preserve">
+    <value>登录到数据库</value>
+  </data>
+  <data name="FileConnection_Password" xml:space="preserve">
+    <value>密码(_P):</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Logo.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="NewItemWizard_Back" xml:space="preserve">
+    <value>&lt; 上一步(_P)</value>
+  </data>
+  <data name="NewItemWizard_Cancel" xml:space="preserve">
+    <value>取消(_C)</value>
+  </data>
+  <data name="NewItemWizard_Configure" xml:space="preserve">
+    <value>正在写入配置</value>
+  </data>
+  <data name="NewItemWizard_Finish" xml:space="preserve">
+    <value>完成(_F)</value>
+  </data>
+  <data name="NewItemWizard_FinishPage_Descript" xml:space="preserve">
+    <value>选择您希望使用的数据库对象并对生成代码进行相关设置。</value>
+  </data>
+  <data name="NewItemWizard_FinishPage_Header" xml:space="preserve">
+    <value>您要在模型中包括哪些数据库对象？</value>
+  </data>
+  <data name="NewItemWizard_FinishPage_Pluralization" xml:space="preserve">
+    <value>确定所生成对象名称的单复数形式(_S)</value>
+  </data>
+  <data name="NewItemWizard_FinishPage_Relation" xml:space="preserve">
+    <value>在模型中生成关系</value>
+  </data>
+  <data name="NewItemWizard_FinishPage_Title" xml:space="preserve">
+    <value>选择数据库对象</value>
+  </data>
+  <data name="NewItemWizard_Generate" xml:space="preserve">
+    <value>正在生成内容</value>
+  </data>
+  <data name="NewItemWizard_Next" xml:space="preserve">
+    <value>下一步(_N) &gt;</value>
+  </data>
+  <data name="NewItemWizard_Nuget" xml:space="preserve">
+    <value>正在准备Nuget包</value>
+  </data>
+  <data name="NewItemWizard_SettingPage_App" xml:space="preserve">
+    <value>您的应用程序应使用哪个数据连接与数据误国进行连接？</value>
+  </data>
+  <data name="NewItemWizard_SettingPage_Config" xml:space="preserve">
+    <value>将当前连接设置另存为(_S):</value>
+  </data>
+  <data name="NewItemWizard_SettingPage_ConnectionString" xml:space="preserve">
+    <value>连接字符串:</value>
+  </data>
+  <data name="NewItemWizard_SettingPage_Database" xml:space="preserve">
+    <value>数据库:</value>
+  </data>
+  <data name="NewItemWizard_SettingPage_Descript" xml:space="preserve">
+    <value>请选择您希望使用的数据连接，用于 Mego 连接到指定数据库。</value>
+  </data>
+  <data name="NewItemWizard_SettingPage_NewConnection" xml:space="preserve">
+    <value>新建连接(_D)</value>
+  </data>
+  <data name="NewItemWizard_SettingPage_Title" xml:space="preserve">
+    <value>选择数据连接</value>
+  </data>
+  <data name="NewItemWizard_Title" xml:space="preserve">
+    <value>创建Mego数据模型向导</value>
+  </data>
+  <data name="NewItemWizard_WaitText" xml:space="preserve">
+    <value>正在准备</value>
+  </data>
+  <data name="NewItemWizard_WaitTitle" xml:space="preserve">
+    <value>初始化</value>
+  </data>
+  <data name="NewItemWizard_WelcomePage_Descript" xml:space="preserve">
+    <value>本向导将引导您一步步创建基于 Mego。</value>
+  </data>
+  <data name="NewItemWizard_WelcomePage_Title" xml:space="preserve">
+    <value>欢迎使用 Mego</value>
+  </data>
+  <data name="ObjectElement_ClassName_Description" xml:space="preserve">
+    <value>用于指定生成定义类的类名。</value>
+  </data>
+  <data name="ObjectElement_ClassName_Name" xml:space="preserve">
+    <value>类型名</value>
+  </data>
+  <data name="ObjectElement_Comments_Description" xml:space="preserve">
+    <value>指定在映射类型的注释。</value>
+  </data>
+  <data name="ObjectElement_Comments_Name" xml:space="preserve">
+    <value>注释</value>
+  </data>
+  <data name="ObjectElement_PropertyName_Description" xml:space="preserve">
+    <value>用于指定生成在数据上下文中的属性名称。</value>
+  </data>
+  <data name="ObjectElement_PropertyName_Name" xml:space="preserve">
+    <value>属性名</value>
+  </data>
+  <data name="PropertyGrid_Category_Common" xml:space="preserve">
+    <value>常规</value>
+  </data>
+  <data name="PropertyGrid_Category_Length" xml:space="preserve">
+    <value>长度</value>
+  </data>
+  <data name="PropertyGrid_Category_Precision" xml:space="preserve">
+    <value>精度</value>
+  </data>
+  <data name="PropertyGrid_Category_String" xml:space="preserve">
+    <value>字符串</value>
+  </data>
+  <data name="ServerConnection_Database" xml:space="preserve">
+    <value>输入数据库名称(_D):</value>
+  </data>
+  <data name="ServerConnection_GroupDb" xml:space="preserve">
+    <value>连接到数据库</value>
+  </data>
+  <data name="ServerConnection_GroupHost" xml:space="preserve">
+    <value>登录到服务器</value>
+  </data>
+  <data name="ServerConnection_Host" xml:space="preserve">
+    <value>服务器名(_E):</value>
+  </data>
+  <data name="ServerConnection_Password" xml:space="preserve">
+    <value>密码(_P):</value>
+  </data>
+  <data name="ServerConnection_UserName" xml:space="preserve">
+    <value>用户名(_U):</value>
+  </data>
+  <data name="ServerConnection_UserNamePassword" xml:space="preserve">
+    <value>用户名和密码验证</value>
+  </data>
+  <data name="ServerConnection_Windows" xml:space="preserve">
+    <value>Windows 身份验证</value>
+  </data>
+</root>
