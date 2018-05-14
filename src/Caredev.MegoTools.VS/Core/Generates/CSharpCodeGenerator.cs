@@ -13,7 +13,7 @@ namespace Caredev.MegoTools.Core.Generates
         {
         }
 
-        private static readonly Dictionary<Type, string> TypeAliasNames = new Dictionary<Type, string>()
+        private static readonly Dictionary<Type, string> _TypeAliasNames = new Dictionary<Type, string>()
         {
             { typeof(bool), "bool" },
             { typeof(byte), "byte" },
@@ -31,34 +31,34 @@ namespace Caredev.MegoTools.Core.Generates
             { typeof(ushort), "ushort" },
         };
 
-        protected override void WriteProperty(StringBuilder builder, Type type, string propertyName)
+        private static readonly HashSet<string> _LanguageKeys = new HashSet<string>()
         {
-            bool isNullable = false;
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-            {
-                isNullable = true;
-                type = type.GetGenericArguments()[0];
-            }
-            var typename = type.FullName;
-            if (!TypeAliasNames.TryGetValue(type, out typename) && type.Namespace == "System")
-            {
-                typename = type.Name;
-            }
-            if (isNullable)
-            {
-                WriteProperty(builder, typename + "?", propertyName);
-            }
-            else
-            {
-                WriteProperty(builder, typename, propertyName);
-            }
-        }
+            "abstract","break","char","continue","do","event","finally","foreach"
+            ,"in","is","new","out","protected","return","sizeof","struct"
+            ,"true","ulong","using","volatile","add","async","dynamic","global"
+            ,"join","orderby","remove","value","as","byte","checked","decimal"
+            ,"double","explicit","fixed","goto","int","lock","null","override"
+            ,"public","sbyte","stackalloc","switch","try","unchecked","using static","while"
+            ,"alias","await","from","group","let","partial(type)","select","var"
+            ,"where","base","case","class","default","else","extern","float"
+            ,"if","interface","long","object","params","readonly","sealed","static"
+            ,"this","typeof","unsafe","virtual","ascending","descending","get","into"
+            ,"nameof","partial","set","when","yield","bool","catch","const"
+            ,"delegate","enum","false","for","implicit","internal","namespace","operator"
+            ,"private","ref","short","string","throw","uint","ushort","void"
+        };
+        protected override HashSet<string> LanguageKeys => _LanguageKeys;
 
-        protected override void WriteProperty(StringBuilder builder, string typename, string propertyName)
+        protected override Dictionary<Type, string> TypeAliasNames => _TypeAliasNames;
+
+        protected override void WritePropertyArray(StringBuilder builder, Type type, string propertyName)
+            => WriteProperty(builder, type, propertyName);
+
+        protected override void WriteProperty(StringBuilder builder, Action<StringBuilder> typename, string propertyName)
         {
             builder.Append("\t\t");
             builder.Append("public ");
-            builder.Append(typename);
+            typename(builder);
             builder.Append(' ');
             builder.Append(propertyName);
             builder.AppendLine(" { get; set; }");
@@ -116,7 +116,7 @@ namespace Caredev.MegoTools.Core.Generates
                 builder.AppendLine("]");
             }
         }
-        
+
         protected override void WriteCommit(StringBuilder builder, string content, int tabCount)
         {
             builder.Append(new string('\t', tabCount));
@@ -126,6 +126,25 @@ namespace Caredev.MegoTools.Core.Generates
             builder.AppendLine(content);
             builder.Append(new string('\t', tabCount));
             builder.AppendLine(@"/// </summary>");
+        }
+
+        protected override void WriteGenerateType(StringBuilder builder, string name, params string[] subnames)
+        {
+            builder.Append(name);
+            builder.Append('<');
+            builder.Append(subnames[0]);
+            for (int i = 1; i < subnames.Length; i++)
+            {
+                builder.Append(", ");
+                builder.Append(subnames[i]);
+            }
+            builder.Append('>');
+        }
+
+        protected override void WriteAttributeNameParameter(StringBuilder builder, string name)
+        {
+            builder.Append(name);
+            builder.Append(" = ");
         }
     }
 }

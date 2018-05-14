@@ -3,22 +3,28 @@
     <Metadata>
         <Identity Id="Caredev.MegoTools.df8930e0-ffc0-45d6-87d1-d87791f4a7f9" Version="1.0" Language="zh-Hans" Publisher="CarefreeXT" />
         <DisplayName>Mego Tools</DisplayName>
-        <Description xml:space="preserve">Mego ORM框架工具扩展。</Description>
-        <Icon>Resources\Logo.ico</Icon>
+        <Description xml:space="preserve">Mego ORM framework tools for visual studio extension.</Description>
+        <MoreInfo>https://github.com/CarefreeXT/MegoTools</MoreInfo>
+        <License>Resources\LICENSE.txt</License>
+        <ReleaseNotes>https://github.com/CarefreeXT/MegoTools/releases</ReleaseNotes>
+        <Icon>Resources\Logo.png</Icon>
+        <PreviewImage>Resources\MegoToolsPreview.jpg</PreviewImage>
         <Tags>Mego;Tools;ORM</Tags>
     </Metadata>
     <Installation>
-        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[13.0]" />
+        <InstallationTarget Id="Microsoft.VisualStudio.Community" Version="[13.0,16.0]" />
     </Installation>
     <Dependencies>
         <Dependency Id="Microsoft.Framework.NDP" DisplayName="Microsoft .NET Framework" d:Source="Manual" Version="[4.5,)" />
         <Dependency Id="Microsoft.VisualStudio.MPF.15.0" DisplayName="Visual Studio MPF 15.0" d:Source="Installed" Version="[13.0,16.0)" />
     </Dependencies>
     <Assets>
+        <Asset Type="Caredev.Mego.1.1.0.nupkg" d:Source="File" Path="Packages\Caredev.Mego.1.1.0.nupkg" d:VsixSubPath="Packages" />
         <Asset Type="Microsoft.VisualStudio.Assembly" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%|" AssemblyName="|%CurrentProject%;AssemblyName|" />
         <Asset Type="Microsoft.VisualStudio.VsPackage" d:Source="Project" d:ProjectName="%CurrentProject%" Path="|%CurrentProject%;PkgdefProjectOutputGroup|" />
         <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="Caredev.MTIT.CSharp.Context" d:TargetPath="|Caredev.MTIT.CSharp.Context;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
         <Asset Type="Microsoft.VisualStudio.ItemTemplate" d:Source="Project" d:ProjectName="Caredev.MTIT.VisualBasic.Context" d:TargetPath="|Caredev.MTIT.VisualBasic.Context;TemplateProjectOutputGroup|" Path="ItemTemplates" d:VsixSubPath="ItemTemplates" />
+
     </Assets>
     <Prerequisites>
         <Prerequisite Id="Microsoft.VisualStudio.Component.CoreEditor" Version="[13.0,16.0)" DisplayName="Visual Studio core editor" />

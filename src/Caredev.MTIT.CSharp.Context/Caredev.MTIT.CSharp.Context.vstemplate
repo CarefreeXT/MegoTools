@@ -12,15 +12,15 @@
     <DefaultName>Model</DefaultName>
   </TemplateData>
   <TemplateContent>
-    <References>
-      <Reference>
-        <Assembly>System</Assembly>
-      </Reference>
-    </References>
     <ProjectItem ReplaceParameters="true" TargetFileName="$fileinputname$.cs">Class.cs</ProjectItem>
   </TemplateContent>
   <WizardExtension>
-    <Assembly>Caredev.MegoTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7036752531664be2</Assembly>
+    <Assembly>Caredev.MegoTools, Version=1.0.0.0, Culture=neutral, PublicKeyToken=105923c5576c9ee7</Assembly>
     <FullClassName>Caredev.MegoTools.VSMegoWizard</FullClassName>
   </WizardExtension>
+  <WizardData>
+    <packages repository="extension" repositoryId="Caredev.MegoTools.df8930e0-ffc0-45d6-87d1-d87791f4a7f9">
+      <package id="Caredev.Mego" skipAssemblyReferences="true" />
+    </packages>
+  </WizardData>
 </VSTemplate>

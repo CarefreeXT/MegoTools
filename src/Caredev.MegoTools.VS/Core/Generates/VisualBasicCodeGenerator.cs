@@ -13,7 +13,7 @@ namespace Caredev.MegoTools.Core.Generates
         {
         }
 
-        private static readonly Dictionary<Type, string> TypeAliasNames = new Dictionary<Type, string>()
+        private static readonly Dictionary<Type, string> _TypeAliasNames = new Dictionary<Type, string>()
         {
             { typeof(bool), "Boolean" },
             { typeof(byte), "Byte" },
@@ -31,37 +31,55 @@ namespace Caredev.MegoTools.Core.Generates
             { typeof(ushort), "UShort" },
         };
 
-
-        protected override void WriteProperty(StringBuilder builder, Type type, string propertyName)
+        private static readonly HashSet<string> _LanguageKeys = new HashSet<string>()
         {
-            bool isNullable = false;
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-            {
-                isNullable = true;
-                type = type.GetGenericArguments()[0];
-            }
-            var typename = type.FullName;
-            if (!TypeAliasNames.TryGetValue(type, out typename) && type.Namespace == "System")
-            {
-                typename = type.Name;
-            }
-            if (isNullable)
-            {
-                WriteProperty(builder, typename + "?", propertyName);
-            }
-            else
-            {
-                WriteProperty(builder, typename, propertyName);
-            }
-        }
+            "AddHandler","AddressOf","Aggregate","Alias","And","AndAlso","Ansi","As"
+            ,"Assembly","Async","Auto","Await","Binary","Boolean","ByRef","Byte"
+            ,"ByVal","Call","Case","Catch","CBool","CByte","CChar","CDate"
+            ,"CDbl","CDec","Char","CInt","Class","CLng","CObj","Compare"
+            ,"Const","Continue","CSByte","CShort","CSng","CStr","CType","CUInt"
+            ,"CULng","CUShort","Custom","Date","Decimal","Declare","Default","Delegate"
+            ,"Dim","DirectCast","Distinct","Do","Double","Each","Else","ElseIf"
+            ,"End","EndIf","Enum","Equals","Erase","Error","Event","Exit"
+            ,"Explicit","False","Finally","For","Friend","From","Function","Get"
+            ,"GetType","GetXMLNamespace","Global","GoSub","GoTo","Group","By","Handles"
+            ,"If","Implements","Imports","In","Inherits","Integer","Interface","Into"
+            ,"Is","IsFalse","IsNot","IsTrue","Iterator","Join","Key","Let"
+            ,"Lib","Like","Long","Loop","Me","Mid","Mod","Module"
+            ,"MustInherit","MustOverride","MyBase","MyClass","Namespace","Narrowing","New","Next"
+            ,"Not","Nothing","NotInheritable","NotOverridable","Object","Of","Off","On"
+            ,"Operator","Option","Optional","Or","OrElse","Out","Overloads","Overridable"
+            ,"Overrides","ParamArray","Partial","Preserve","Private","Property","Protected","Public"
+            ,"RaiseEvent","ReadOnly","ReDim","REM","RemoveHandler","Resume","Return","SByte"
+            ,"Select","Set","Shadows","Shared","Short","Single","Skip","Static"
+            ,"Step","Stop","Strict","String","Structure","Sub","SyncLock","Take"
+            ,"Text","Then","Throw","To","True","Try","TryCast","TypeOf"
+            ,"UInteger","ULong","Unicode","Until","UShort","Using","Variant","Wend"
+            ,"When","Where","While","Widening","With","WithEvents","WriteOnly","Xor","Yield"
+        };
+        protected override HashSet<string> LanguageKeys => _LanguageKeys;
 
-        protected override void WriteProperty(StringBuilder builder, string typename, string propertyName)
+        protected override Dictionary<Type, string> TypeAliasNames => _TypeAliasNames;
+
+
+        protected override void WriteProperty(StringBuilder builder, Action<StringBuilder> typename, string propertyName)
         {
             builder.Append("\t\t");
             builder.Append("Public Property ");
             builder.Append(propertyName);
             builder.Append(" AS ");
-            builder.AppendLine(typename);
+            typename(builder);
+            builder.AppendLine();
+        }
+
+        protected override void WritePropertyArray(StringBuilder builder, Type type, string propertyName)
+        {
+            builder.Append("\t\t");
+            builder.Append("Public Property ");
+            builder.Append(propertyName);
+            builder.Append("() AS ");
+            WriteType(builder, type.GetElementType());
+            builder.AppendLine();
         }
 
         protected override void WriteEndClass(StringBuilder builder)
@@ -125,6 +143,25 @@ namespace Caredev.MegoTools.Core.Generates
             builder.AppendLine(content);
             builder.Append(new string('\t', tabCount));
             builder.AppendLine(@"''' </summary>");
+        }
+
+        protected override void WriteGenerateType(StringBuilder builder, string name, params string[] subnames)
+        {
+            builder.Append(name);
+            builder.Append("(Of ");
+            builder.Append(subnames[0]);
+            for (int i = 1; i < subnames.Length; i++)
+            {
+                builder.Append(", Of ");
+                builder.Append(subnames[i]);
+            }
+            builder.Append(')');
+        }
+
+        protected override void WriteAttributeNameParameter(StringBuilder builder, string name)
+        {
+            builder.Append(name);
+            builder.Append(":= ");
         }
     }
 }

@@ -24,7 +24,25 @@ namespace Caredev.MegoTools.Core.Generates
 
         private readonly static Regex SafeNameRegex = new Regex("[^A-Z,a-z,0-9,_]");
         private IPluralizationService Pluralization = new EnglishPluralizationService();
-        private string SafeName(string input) => SafeNameRegex.Replace(input, "");
+        private int _CharIndex = 0;
+        private string CharIndex
+        {
+            get
+            {
+                var result = (_CharIndex++).ToString();
+                if (_CharIndex > 9) _CharIndex = 0;
+                return result;
+            }
+        }
+        private string SafeName(string input)
+        {
+            var name = SafeNameRegex.Replace(input, "");
+            if (LanguageKeys.Contains(name))
+            {
+                name += CharIndex;
+            }
+            return name;
+        }
         public void Add(ObjectElement obj, IEnumerable<ColumnElement> columns)
         {
             var className = SafeName(string.IsNullOrEmpty(obj.ClassName) ? obj.Name : obj.ClassName);
@@ -44,7 +62,7 @@ namespace Caredev.MegoTools.Core.Generates
                 var name = SafeName(string.IsNullOrEmpty(column.PropertyName) ? column.Name : column.PropertyName);
                 if (objectGenerator.ClassName == name)
                 {
-                    name += "1";
+                    name += CharIndex;
                 }
                 var memberGenerator = new MemberGenerator(column, name);
                 objectGenerator.Members.Add(column.Name, memberGenerator);
@@ -52,9 +70,41 @@ namespace Caredev.MegoTools.Core.Generates
             Objects.Add(obj.Key, objectGenerator);
         }
 
-        protected abstract void WriteProperty(StringBuilder builder, Type type, string propertyName);
+        protected abstract Dictionary<Type, string> TypeAliasNames { get; }
 
-        protected abstract void WriteProperty(StringBuilder builder, string typename, string propertyName);
+        protected abstract HashSet<string> LanguageKeys { get; }
+
+        protected void WriteType(StringBuilder builder, Type type)
+        {
+            bool isNullable = false;
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+            {
+                isNullable = true;
+                type = type.GetGenericArguments()[0];
+            }
+            var typename = type.FullName;
+            if (!TypeAliasNames.TryGetValue(type, out typename) && type.Namespace == "System")
+            {
+                typename = type.Name;
+            }
+            builder.Append(typename);
+            if (isNullable)
+            {
+                builder.Append('?');
+            }
+        }
+
+        protected void WriteProperty(StringBuilder builder, Type type, string propertyName)
+        {
+            WriteProperty(builder, b => WriteType(b, type), propertyName);
+        }
+
+        protected void WriteProperty(StringBuilder builder, string typename, string propertyName)
+        {
+            WriteProperty(builder, b => b.Append(typename), propertyName);
+        }
+
+        protected abstract void WriteProperty(StringBuilder builder, Action<StringBuilder> typename, string propertyName);
 
         protected abstract void WriteStartClass(StringBuilder builder, string className);
 
@@ -68,14 +118,20 @@ namespace Caredev.MegoTools.Core.Generates
 
         protected abstract void WriteAttributeParameter(StringBuilder builder, string content);
 
+        protected abstract void WriteAttributeNameParameter(StringBuilder builder, string name);
+
         protected abstract void WriteEndAttribute(StringBuilder builder);
+
+        protected abstract void WriteGenerateType(StringBuilder builder, string name, params string[] subnames);
+
+        protected abstract void WritePropertyArray(StringBuilder builder, Type type, string propertyName);
 
         public string GenerateDbSet()
         {
             var builder = new StringBuilder();
             foreach (var obj in Objects.Values)
             {
-                WriteProperty(builder, $"DbSet<{obj.ClassName}>", obj.PropertyName);
+                WriteProperty(builder, b => WriteGenerateType(b, "DbSet", obj.ClassName), obj.PropertyName);
             }
             return builder.ToString();
         }
@@ -100,7 +156,9 @@ namespace Caredev.MegoTools.Core.Generates
                         builder.Append('\"');
                         if (!string.IsNullOrEmpty(element.Schema))
                         {
-                            builder.Append(", Schema = \"");
+                            builder.Append(", ");
+                            WriteAttributeNameParameter(builder, "Schema");
+                            builder.Append('\"');
                             builder.Append(element.Schema);
                             builder.Append('\"');
                         }
@@ -128,7 +186,8 @@ namespace Caredev.MegoTools.Core.Generates
                         builder.Append("\"");
                         if (col.ColumnIndex.HasValue)
                         {
-                            builder.Append(", Order = ");
+                            builder.Append(", ");
+                            WriteAttributeNameParameter(builder, "Order");
                             builder.Append(col.ColumnIndex.Value.ToString());
                         }
                         builder.Append(")");
@@ -165,7 +224,7 @@ namespace Caredev.MegoTools.Core.Generates
                         case ColumnStringElement stringColumn:
                             if (stringColumn.MaxLength.HasValue)
                             {
-                                WriteAttributeParameter(builder, "Length(");
+                                WriteAttributeParameter(builder, "mego.String(");
                                 builder.Append(stringColumn.MaxLength.ToString());
                                 if (stringColumn.IsFixed)
                                 {
@@ -173,7 +232,9 @@ namespace Caredev.MegoTools.Core.Generates
                                 }
                                 if (!stringColumn.IsUnicode)
                                 {
-                                    builder.Append(", IsUnicode = false");
+                                    builder.Append(", ");
+                                    WriteAttributeNameParameter(builder, "IsUnicode");
+                                    builder.Append("false");
                                 }
                                 builder.Append(')');
                             }
@@ -205,7 +266,14 @@ namespace Caredev.MegoTools.Core.Generates
                             break;
                     }
                     WriteEndAttribute(builder);
-                    WriteProperty(builder, member.Element.ClrType, member.PropertyName);
+                    if (member.Element.ClrType.IsArray)
+                    {
+                        WritePropertyArray(builder, member.Element.ClrType, member.PropertyName);
+                    }
+                    else
+                    {
+                        WriteProperty(builder, member.Element.ClrType, member.PropertyName);
+                    }
                 }
                 WriteEndClass(builder);
             }

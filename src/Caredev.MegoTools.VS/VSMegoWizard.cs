@@ -18,7 +18,7 @@ using Res = Caredev.MegoTools.Properties.Resources;
 
 namespace Caredev.MegoTools
 {
-    public class VSMegoWizard : IWizard
+    public class VSMegoWizard : IVsTemplateWizard
     {
         #region IWizard
         public void BeforeOpeningFile(ProjectItem projectItem)
@@ -54,7 +54,12 @@ namespace Caredev.MegoTools
             {
                 if (!installerServices.IsPackageInstalled(project, packageId))
                 {
-                    packageInstaller.InstallLatestPackage(null, project, packageId, false, false);
+                    packageInstaller.InstallPackagesFromVSExtensionRepository(
+                        "Caredev.MegoTools.df8930e0-ffc0-45d6-87d1-d87791f4a7f9", false, false, project, new Dictionary<string, string>
+                        {
+                            { packageId, "1.1.0"}
+                        });
+                    //packageInstaller.InstallLatestPackage(null, project, packageId, false, false);
                 }
             }
         }
@@ -95,23 +100,40 @@ namespace Caredev.MegoTools
 
                 var framework = GetFrameworkName(currentProject);
                 string language = string.Empty;
+                var isnetcore = false;
                 var val = currentProject.Kind.ToUpper().Trim('{', '}');
                 switch (currentProject.Kind.ToUpper().Trim('{', '}'))
                 {
-                    case "FAE04EC0-301F-11D3-BF4B-00C04F79EFBC":
+                    case "FAE04EC0-301F-11D3-BF4B-00C04F79EFBC"://.net framework
                         language = "CSharp";
                         break;
-                    case "F184B08F-C81C-45F6-A57F-5ABD9991F28F":
+                    case "F184B08F-C81C-45F6-A57F-5ABD9991F28F"://.net framework
                         language = "VisualBasic";
+                        break;
+                    case "9A19103F-16F7-4668-BE54-9A1E7A4F7556"://.net core
+                        language = "CSharp";
+                        isnetcore = true;
+                        break;
+                    case "778DAE3C-4631-46EA-AA77-85C1314464D9"://.net core
+                        language = "VisualBasic";
+                        isnetcore = true;
                         break;
                     default:
                         throw new NotSupportedException(currentProject.Kind);
                 }
-                var extenderNames = (string[])currentProject.ExtenderNames;
-                var iswebproject = extenderNames.Contains("WebApplication");
+                var iswebproject = false;
+                if (!isnetcore)
+                {
+                    var extenderNames = (string[])currentProject.ExtenderNames;
+                    iswebproject = extenderNames.Contains("WebApplication");
+                }
+                else
+                {
+                    replacementsDictionary.Add("$netcore$", "true");
+                }
                 var configFileName = iswebproject ? "Web.config" : "App.config";
-                var templateName = iswebproject ? "WebConfig.zip" : 
-                    (language == "VisualBasic"? "AppConfiguration.zip" : "AppConfig.zip");
+                var templateName = iswebproject ? "WebConfig.zip" :
+                    (language == "VisualBasic" ? "AppConfiguration.zip" : "AppConfig.zip");
 
                 NewItemWizardViewModel vm = new NewItemWizardViewModel()
                 {
@@ -120,55 +142,28 @@ namespace Caredev.MegoTools
                 };
                 if (DialogHelper.ShowDialog(ref vm) == true)
                 {
-                    var msgPump = new CommonMessagePump();
-                    msgPump.AllowCancel = true;
-                    msgPump.EnableRealProgress = false;
-                    msgPump.WaitTitle = Res.NewItemWizard_WaitTitle;
-                    msgPump.WaitText = Res.NewItemWizard_WaitText;
-
-                    CancellationTokenSource cts = new CancellationTokenSource();
-                    var task = System.Threading.Tasks.Task.Run(() =>
+                    if (vm.IsSaveConfig && !isnetcore)
                     {
-                        cts.Token.ThrowIfCancellationRequested();
-                        if (vm.IsSaveConfig)
+                        var configureItem = FindProjectItemConfigure(currentProject, configFileName);
+                        if (configureItem == null)
                         {
-                            msgPump.WaitText = Res.NewItemWizard_Configure;
-                            var configureItem = FindProjectItemConfigure(currentProject, configFileName);
-                            if (configureItem == null)
-                            {
-                                var templatePath = ((Solution2)dte.Solution).GetProjectItemTemplate(templateName, language);
-                                currentProject.ProjectItems.AddFromTemplate(templatePath, configFileName);
-                                configureItem = FindProjectItemConfigure(currentProject, configFileName);
-                            }
-                            replacementsDictionary.Add("$megoargu$", $"\"{vm.ConfigName}\"");
-                            cts.Token.ThrowIfCancellationRequested();
-                            WriteConnectionString(vm, configureItem);
+                            var templatePath = ((Solution2)dte.Solution).GetProjectItemTemplate(templateName, language);
+                            currentProject.ProjectItems.AddFromTemplate(templatePath, configFileName);
+                            configureItem = FindProjectItemConfigure(currentProject, configFileName);
                         }
-                        else
-                        {
-                            var info = vm.Information;
-                            replacementsDictionary.Add("$megoargu$", $"\"{info.ConnectionString}\", \"{info.ProviderName}\"");
-                        }
-                        cts.Token.ThrowIfCancellationRequested();
-                        msgPump.WaitText = Res.NewItemWizard_Generate;
-                        var generator = vm.Generator;
-                        replacementsDictionary.Add("$megodbset$", generator.GenerateDbSet());
-                        cts.Token.ThrowIfCancellationRequested();
-                        replacementsDictionary.Add("$megoclassdef$", generator.GenerateSetClass());
-                        cts.Token.ThrowIfCancellationRequested();
-                        msgPump.WaitText = Res.NewItemWizard_Nuget;
-                        _AllowAddProjectItem = true;
-                    }, cts.Token);
-
-                    var exitCode = msgPump.ModalWaitForHandles(((IAsyncResult)task).AsyncWaitHandle);
-                    if (exitCode == CommonMessagePumpExitCode.UserCanceled || exitCode == CommonMessagePumpExitCode.ApplicationExit)
-                    {
-                        cts.Cancel();
+                        replacementsDictionary.Add("$megoargu$", $"\"{vm.ConfigName}\"");
+                        WriteConnectionString(vm, configureItem);
                     }
                     else
                     {
-                        InstallNugetPackage(currentProject);
+                        var info = vm.Information;
+                        replacementsDictionary.Add("$megoargu$", $"\"{info.ConnectionString}\", \"{info.ProviderName}\"");
                     }
+                    var generator = vm.Generator;
+                    replacementsDictionary.Add("$megodbset$", generator.GenerateDbSet());
+                    replacementsDictionary.Add("$megoclassdef$", generator.GenerateSetClass());
+                    _AllowAddProjectItem = true;
+                    InstallNugetPackage(currentProject);
                 }
                 else
                 {
@@ -184,7 +179,7 @@ namespace Caredev.MegoTools
                 throw new WizardCancelledException("The wizard has been cancelled by the user.");
             }
         }
-
+        
         private static ProjectItem FindProjectItemConfigure(Project currentProject, string filename)
         {
             filename = filename.ToLower();
@@ -214,5 +209,7 @@ namespace Caredev.MegoTools
             }
             return null;
         }
+
+
     }
 }
