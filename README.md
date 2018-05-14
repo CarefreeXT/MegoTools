@@ -1,6 +1,9 @@
 # MegoTools
 Mego framework Integrated tools for visual studio.
 
+# Installation
+Please from [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=CarefreeXT.MegoTools) downlad and install.
+
 # License
 Copyright © 2018, CarefreeXT. All rights reserved.
 
